@@ -1,14 +1,24 @@
 {{>layout/header}}
-    <h1>스프링 부트로 시작하는 웹서비스</h1>
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-6">
-                <a href="/posts/save" role="button" class="btn btn-primary">글 등록</a>
-            </div>
-        </div>
+<h1>스프링 부트로 시작하는 웹서비스</h1>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-6">
+            <a href="/posts/save" role="button" class="btn btn-primary">글 등록</a>
 
-        <!-- 목록 출력 영역 -->
-        <div>
+            {{#userName}}
+                Logged in as : <span id="user">{{userName}}</span>
+                <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+            {{/userName}}
+            {{^userName}}
+                <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
+                <a href="/oauth2/authorization/naver" class="btn btn-success active" role="button">Naver Login</a>
+            {{/userName}}
+
+        </div>
+    </div>
+
+    <!-- 목록 출력 영역 -->
+    <div>
         <table class="table table-horizontal table-bordered">
             <thead class="thead-strong">
             <tr>
@@ -19,11 +29,11 @@
             </tr>
             </thead>
             <tbody id="tbody">
-<!--            알아서 반복 될거임 -->
+            <!--            알아서 반복 될거임 -->
             {{#posts}}
                 <tr>
                     <td>{{id}}</td>
-                    <td><a href="/posts/update/{{id}}">{{title}}</a> </td>
+                    <td><a href="/posts/update/{{id}}">{{title}}</a></td>
                     <td>{{author}}</td>
                     <td>{{modifiedDate}}</td>
                 </tr>
